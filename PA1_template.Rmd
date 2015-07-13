@@ -7,11 +7,26 @@ output:
 
 
 ## Loading and preprocessing the data
+Information regarding the estructu
 
+```{r echo=TRUE}
+
+library(dplyr)
+data <- read.csv("data/activity.csv")
+# Average (mean) number of steps by date
+by_date <- group_by(data,date )
+sum_steps <- summarise(by_date,stps=sum(steps))
+
+```
 
 
 ## What is mean total number of steps taken per day?
+```{r echo=TRUE}
+hist(sum_steps$stps, breaks=15)
 
+```
+
+From the histogram, it is clear that the mean equals to `r mean(sum_steps$stps,na.rm=TRUE)` and the median is `r quantile(sum_steps$stps,0.5,na.rm=TRUE)`.
 
 
 ## What is the average daily activity pattern?
